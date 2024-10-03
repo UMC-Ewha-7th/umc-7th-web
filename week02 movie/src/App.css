@@ -1,0 +1,13 @@
+.movieList{
+    width: 100vw;
+    display: inline-block;
+}
+
+.poster{
+    margin: 10px;
+}
+
+.poster:hover{
+    cursor: pointer;
+    filter: brightness(0.4);
+}
