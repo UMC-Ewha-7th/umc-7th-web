@@ -1,0 +1,66 @@
+/* 중앙 정렬 */
+.movies-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  justify-content: center;  /* 수평 중앙 정렬 */
+  align-items: center;  /* 수직 중앙 정렬 */
+  padding: 20px;
+  min-height: 100vh;  /* 화면 높이만큼 중앙에 배치 */
+  box-sizing: border-box;
+}
+
+/* 포스터 컨테이너 스타일 */
+.movie-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* 포스터 이미지 */
+.movie-container img {
+  width: 100%;   /* 이미지가 부모 요소(movie-container) 안에 꽉 차도록 설정 */
+  height: 100%;  /* 부모 요소에 맞춰 이미지 높이도 설정 */
+  object-fit: cover;  /* 이미지 비율을 유지하며 잘림 없이 맞추기 */
+  border-radius: 10px;
+  transition: opacity 0.3s ease;  /* 이미지의 투명도 변경 */
+}
+
+/* 마우스 오버 시 회색 투명 효과 적용 */
+.movie-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 98%;  /* 이미지와 크기가 정확히 일치하도록 설정 */
+  background-color: rgba(0, 0, 0, 0.5);  /* 회색 반투명 배경 */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 10px;  /* 이미지와 동일하게 둥근 모서리 적용 */
+}
+
+/* 마우스 오버 시 회색 배경이 나타남 */
+.movie-container:hover::before {
+  opacity: 1;
+}
+
+/* 마우스 오버 시 영화 설명이 나타남 */
+.movie-overview {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
+}
+
+.movie-container:hover .movie-overview {
+  opacity: 1;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="todo.css">
+  </head>
+  <body>
+    <!--주 제목-->
+    <div class="mainTitle">UMC STUDY PLAN</div>
+
+    <!--할일 정보 입력하는 곳-->
+    <form action="#" class="addToDo" onsubmit="return addActiveList()">
+      <input type="text" class="addToDoInfo" placeholder="스터디 계획을 작성해보세요!">
+    </form>
+
+    <!--투두리스트-->
+    <div class="list">
+      <!--투두리스트Active-->
+      <div class="activeToDo">
+        <div class="activeTitle">해야 할 일</div>
+        <ul type="none" class="listActive">
+        </ul>
+      </div>
+
+      <!--투두리스트Done-->
+      <div class="doneToDo">
+        <div class="doneTitle">해낸 일</div>
+        <ul type="none" class="listDone">
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="todo.js"></script>
+</html>

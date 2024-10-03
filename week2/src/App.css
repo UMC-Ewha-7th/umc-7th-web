@@ -1,0 +1,26 @@
+#root {
+  max-width: 1280px;
+  text-align: center;
+}
+
+.button {
+  width: 100px;
+  height: 20px;
+}
+
+.todos {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.todo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+}
