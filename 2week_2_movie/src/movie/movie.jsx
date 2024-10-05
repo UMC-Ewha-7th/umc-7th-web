@@ -1,15 +1,16 @@
 import React from 'react';
 import './movie.css';
-import posters from './poster';
+
+import { MOVIES } from '../assets/movieDummy';
 
 function Movie() {
     return (
         <div className="movie-container">
-            {posters.map((poster, index) => (
-                <img className="movie-poster"
-                key={index}
-                src={poster.posterUrl} /> ))
-            }
+            {MOVIES.results.map((movie, index) => (
+        <img className="movie-poster"
+        key={index}
+        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+        alt={`${movie.title} Poster`}/>))}
         </div>
     );
 }
