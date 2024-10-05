@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    background-color: rgb(223, 235, 252);            
+    padding-top: 20vh;
+}
+
+input{
+    height: 30px;
+    width: 70%;
+
+    border: solid rgb(86, 143, 223) 2px;
+    border-radius: 5px;
+}
+.type{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100vw;
+}
+
+button{
+    background-color:rgba(86, 143, 223, 0.214) ;
+    border: solid rgb(86, 143, 223) 1px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    size: 120%;
+}
+
+p{
+    margin: 0px;
+}
+
+.todo{
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
