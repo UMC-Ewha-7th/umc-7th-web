@@ -1,0 +1,15 @@
+.movie-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .movie-poster {
+    width: 150px;
+    margin: 10px;
+    border-radius: 20px;
+  }
+  .movie-poster:hover {
+    filter: brightness(0.4);
+  }
+  
