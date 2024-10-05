@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        transform: translate(20px, 20px);
+        position: relative;
+      }
+
+      .square {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        transform: rotate(45deg);
+        transition-property: background-color;
+        transition-duration: 1s;
+        transition-timing-function: linear;
+      }
+
+      .square:hover {
+        background-color: purple;
+      }
+
+      .square:nth-child(1) {
+        position: relative;
+        top: 0;
+      }
+
+      .square:nth-child(2) {
+        position: absolute;
+        top: 140px;
+      }
+
+      .square:nth-child(3) {
+        position: absolute;
+        top: 280px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </div>
+  </body>
+</html>
