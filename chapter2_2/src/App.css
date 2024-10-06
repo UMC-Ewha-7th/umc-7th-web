@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+.container img {
+  width: 100%; /* 이미지가 그리드 셀에 꽉 차도록 */
+  height: auto; /* 이미지 비율 유지 */
+}
+
+.container img:hover {
+  filter: brightness(0.5);
+}
