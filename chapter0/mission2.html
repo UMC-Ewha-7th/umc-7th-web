@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr 4fr 2fr 2fr 1fr;
+        place-items: stretch;
+        color: white;
+        width: 400px;
+        height: 500px;
+      }
+
+      /* 자식 요소에 flex 레이아웃을 적용 */
+      .container > * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      header {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        background-color: black;
+      }
+      .menu {
+        grid-column: 2/5;
+        grid-row: 1/2;
+        background-color: rgb(235, 43, 110);
+      }
+      section {
+        grid-column: 1/5;
+        grid-row: 2/3;
+        background-color: rgb(72, 135, 222);
+      }
+      .item1 {
+        grid-column: 1/3;
+        grid-row: 3/5;
+        background-color: rgba(17, 23, 212, 0.735);
+      }
+      .blank {
+        grid-column: 3/4;
+        grid-row: 3/5;
+      }
+      .image {
+        grid-column: 4/5;
+        grid-row: 3/4;
+        background-color: aquamarine;
+      }
+      .extra {
+        grid-column: 4/5;
+        grid-row: 4/5;
+        background-color: #09804e;
+      }
+      footer {
+        grid-column: 1/5;
+        grid-row: 5/6;
+        background-color: #e7ce60;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>HEADER</header>
+      <div class="menu">MENU</div>
+      <section>HERO</section>
+      <div class="item1">MAIN</div>
+      <div class="blank"></div>
+      <div class="image">IMAGE</div>
+      <div class="extra">EXTRA</div>
+      <footer>BANNER</footer>
+    </div>
+  </body>
+</html>
