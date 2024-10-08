@@ -89,6 +89,9 @@ nav {
     margin-right: 10px;
     background-color: var(--logo-color);
 }
-button:hover {
+.btn-login:hover, .btn-signup:hover {
     cursor: pointer;
+}
+.btn-login:active, .btn-signup:active{
+    filter: brightness(0.3);
 }

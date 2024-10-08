@@ -1,17 +1,22 @@
 import styled from 'styled-components';
-import '../variable.css';
+import '../../variable.css';
 
-export const MovieContainer = styled.div`
+export const CardList = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+`
+export const CardContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 `;
 
-export const MovieWrapper = styled.div`
+export const CardWrapper = styled.div`
   margin: 10px;
 `;
 
-export const MoviePoster = styled.img`
+export const CardPoster = styled.img`
     width: 150px;
     border-radius: 20px;
     dispaly: flex;
@@ -22,7 +27,7 @@ export const MoviePoster = styled.img`
   }
 `;
 
-export const MovieTitle = styled.h3`
+export const CardTitle = styled.h3`
   font-size: 15px;
   color: var(--text-color);
 
@@ -31,6 +36,6 @@ export const MovieTitle = styled.h3`
   overflow-wrap: break-word;
 `;
 
-export const MovieReleaseDate = styled.p`
+export const CardReleaseDate = styled.p`
   color: var(--text-color);
 `;
