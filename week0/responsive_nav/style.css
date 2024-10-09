@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+.display-none {
+    display: none;
+}
+
+button {
+    border: 0;
+    background-color: inherit;
+    cursor: pointer;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 88px;
+    padding: 24px;
+}
+.nav-right {
+    display: flex;
+}
+.nav-btn {
+    margin-right: 20px;
+}
+.nav-btn > button {
+    font-size: 0.87em;
+}
+.smumc_logo {
+    font-weight: bold;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    margin-left: -6px;
+}
+.smumc_logo > img {
+    width: 40px;
+    margin-right: 7px;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+#contents1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 93px;
+    column-gap: 2.5em;
+    margin-right: 1.2rem;
+    max-width: 48rem;
+}
+#contents1-logo {
+    margin: auto 0;
+    max-width: 374.91px;
+}
+#contents1-logo > img {
+    max-width: 100%;
+    height: auto;
+}
+#contents1-title {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.25rem;
+    align-items: center;
+    width: 310px;
+}
+#contents1-title > h1 {
+    font-size: 3.75rem;
+    line-height: 1;
+}
+.contents-div {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    text-align: center;
+}
+#contents1-title > button {
+    background-color: rgb(187 247 208);
+    height: 2.5rem;
+    padding: .5rem 1rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    border-radius: 1rem;
+    padding-top: .7rem;
+}
+
+@media screen and (max-width: 752px) {
+    .smumc_logo > img {
+        max-width: 37.5px;
+        margin-right: 5px;
+    }
+    .smumc_logo > span {
+        display: none;
+    }
+    .nav-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .nav-btn-word > button {
+        font-size: 0.6rem;
+    }
+    .nav-btn-svg {
+        margin-top: 3px;
+    }
+    #contents1 {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 96px;
+        margin-left: 0;
+        row-gap: 2.25rem;
+        margin-right: 1.5rem;
+    }
+    #contents1-logo {
+        width: 400px;
+    }
+    #contents1-logo > img {
+        max-width: 400px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .smumc_logo > img {
+        max-width: 37.5px;
+        margin-right: 5px;
+        height: 26.4px;
+    }
+    .smumc_logo > span {
+        display: none;
+    }
+    .nav-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .nav-btn-word > button {
+        font-size: 0.6rem;
+    }
+    .nav-btn-svg {
+        margin-top: 3px;
+    }
+}
+
+@media screen and (max-width: 593.6px) {
+    .smumc_logo > img {
+        max-width: 37.5px;
+        margin-right: 5px;
+        height: 26.39px;
+    }
+}
