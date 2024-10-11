@@ -6,6 +6,7 @@ import { useState } from 'react'
 function App() {
 //js 불러와서 results만 뽑아내기, 그 배열에서 다시 poster_path
 //const [movies, setMovies] = useState([MOVIES.results]);
+
 console.log(MOVIES);
 //console.log(movies[0].poster_path);
 
