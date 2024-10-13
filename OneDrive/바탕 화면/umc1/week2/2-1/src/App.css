@@ -1,0 +1,49 @@
+/* ToDo List 스타일 */
+.todo-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+}
+
+/* 입력 폼 스타일 */
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+/* 입력 필드 스타일 */
+.todo-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* 버튼 스타일 */
+.todo-button {
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border:none;
+  border-radius: 10px;
+}
+
+/* 할 일 목록 스타일 */
+.todo-list {
+  list-style: none;
+}
+
+/* 할 일 항목 스타일 */
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+
+.todo-item p {
+  margin: 0;
+}
