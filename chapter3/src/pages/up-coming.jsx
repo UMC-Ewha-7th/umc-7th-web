@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import useCustomFetch from '../hooks/useCustomFetch.js';
+import { useNavigate } from 'react-router-dom';
+
+const apiKey = import.meta.env.VITE_API_KEY;
+const movieKey = import.meta.env.VITE_MOVIE_API_URL;
 
 const Container = styled.div`
   width: 100%;
@@ -17,44 +22,89 @@ const ContainerImg = styled.img`
   }
 `;
 
+const Title = styled.p`
+  font-size: 12px;
+  color: white;
+  margin: 1px;
+`;
+
+const Date = styled.p`
+  font-size: 7px;
+  color: white;
+  margin: 2px;
+`;
+
 function UpComing() {
   const base_url = 'https://image.tmdb.org/t/p/';
   const file_size = 'w200/';
+  const navigate = useNavigate();
 
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
 
-  useEffect(() => {
-    const getMovies = async () => {
-      try {
-        // API 호출
-        const response = await axios.get(
-          'https://api.themoviedb.org/3/movie/upcoming?language=ko-KR&page=1',
-          {
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNzU2NTg2MDFlY2Y5ZDIyY2M1MjQ5NjZjOGZhMDZmZSIsIm5iZiI6MTcyNzk2MjU5Mi40MjYxMzMsInN1YiI6IjY2ZmU4ZDk3YjE0NjI4MmY3Yjg0ZGJkZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.m3YhNxI1iVr-AMFMlgKfZkPcYfU06ZI7aowPtVGBB_U`,
-            },
-          }
-        );
+  const {
+    data: movies,
+    isLoading,
+    isError,
+  } = useCustomFetch(`/movie/upcoming?language=ko-KR&page=1`);
 
-        // 응답 데이터를 상태에 저장
-        setMovies(response.data.results);
-      } catch (error) {
-        console.error('Error fetching the movies:', error);
-      }
-    };
+  if (isLoading) {
+    return (
+      <div>
+        <h1 style={{ color: 'white' }}>로딩 중입니다...</h1>
+      </div>
+    );
+  }
 
-    getMovies();
-  }, []);
+  if (isError) {
+    return (
+      <div>
+        <h1 style={{ color: 'white' }}>에러 중</h1>
+      </div>
+    );
+  }
+
+  // useEffect(() => {
+  //   const getMovies = async () => {
+  //     try {
+  //       // API 호출
+  //       const response = await axios.get(
+  //         '${movieKey}/movie/upcoming?language=ko-KR&page=1',
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${apiKey}`,
+  //           },
+  //         }
+  //       );
+
+  //       // 응답 데이터를 상태에 저장
+  //       setMovies(response.data.results);
+  //     } catch (error) {
+  //       console.error('Error fetching the movies:', error);
+  //     }
+  //   };
+
+  //   getMovies();
+  // }, []);
 
   return (
     <>
       <Container>
-        {movies.map((movie) => (
+        {movies.data?.results.map((movie) => (
           <div key={movie.id}>
             <ContainerImg
               src={`${base_url}${file_size}${movie.poster_path}`}
               alt={movie.title}
+              onClick={() =>
+                navigate(`/movie/${movie.id}`, {
+                  replace: false,
+                  state: { moiveId: movie.id },
+                })
+              }
             />
+            <Title>
+              <strong>{movie.title}</strong>
+            </Title>
+            <Date>{movie.release_date}</Date>
           </div>
         ))}
       </Container>
