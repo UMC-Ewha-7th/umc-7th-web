@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react'; // useEffect 추가
 import axios from 'axios';
 import styled from 'styled-components';
+import { axiosInstance } from '../apis/axios-instance';
+import useCustomFetch from '../hooks/useCustomFetch.js';
+import { useNavigate } from 'react-router-dom';
+
+const apiKey = import.meta.env.VITE_API_KEY;
+const movieKey = import.meta.env.VITE_MOVIE_API_URL;
 
 const Container = styled.div`
   width: 100%;
@@ -32,41 +38,65 @@ const Date = styled.p`
 function Movie() {
   const base_url = 'https://image.tmdb.org/t/p/';
   const file_size = 'w200/';
+  const navigate = useNavigate();
 
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
+  const {
+    data: movies,
+    isLoading,
+    isError,
+  } = useCustomFetch(`/movie/popular?language=ko-KR&page=1`);
 
-  useEffect(() => {
-    const getMovies = async () => {
-      try {
-        // API 호출
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1`,
-          {
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNzU2NTg2MDFlY2Y5ZDIyY2M1MjQ5NjZjOGZhMDZmZSIsIm5iZiI6MTcyNzk2MjU5Mi40MjYxMzMsInN1YiI6IjY2ZmU4ZDk3YjE0NjI4MmY3Yjg0ZGJkZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.m3YhNxI1iVr-AMFMlgKfZkPcYfU06ZI7aowPtVGBB_U`,
-            },
-          }
-        );
+  if (isLoading) {
+    return (
+      <div>
+        <h1 style={{ color: 'white' }}>로딩 중입니다...</h1>
+      </div>
+    );
+  }
 
-        // 응답 데이터를 상태에 저장
-        setMovies(response.data.results);
-      } catch (error) {
-        console.error('Error fetching the movies:', error);
-      }
-    };
+  if (isError) {
+    return (
+      <div>
+        <h1 style={{ color: 'white' }}>에러 중</h1>
+      </div>
+    );
+  }
 
-    getMovies();
-  }, []);
+  // useEffect(() => {
+  //   const getMovies = async () => {
+  //     try {
+  //       // API 호출
+  //       const response = await axiosInstance.get(
+  //         `/movie/popular?language=ko-KR&page=1`,
+
+  //       );
+
+  //       // 응답 데이터를 상태에 저장
+  //       setMovies(response.data.results);
+  //     } catch (error) {
+  //       console.error('Error fetching the movies:', error);
+  //     }
+  //   };
+
+  //   getMovies();
+  // }, []);
 
   return (
     <>
       <Container>
-        {movies.map((movie) => (
+        {movies.data?.results.map((movie) => (
           <div key={movie.id}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <ContainerImg
                 src={`${base_url}${file_size}${movie.poster_path}`}
                 alt={movie.title}
+                onClick={() =>
+                  navigate(`/movie/${movie.id}`, {
+                    replace: false,
+                    state: { moiveId: movie.id },
+                  })
+                }
               />
               <Title>
                 <strong>{movie.title}</strong>

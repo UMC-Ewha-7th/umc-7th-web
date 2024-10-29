@@ -9,6 +9,8 @@ import TopRated from '../pages/top-rated';
 import UpComing from '../pages/up-coming';
 import NotFound from '../pages/not-found';
 import styled from 'styled-components';
+import HomePage from '../pages/home';
+import MovieDetail from '../pages/movie_detail';
 
 const White = styled.h2`
   color: white;
@@ -20,7 +22,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <NotFound />,
     children: [
-      { index: true, element: <Movie /> },
+      { index: true, element: <HomePage /> },
       {
         path: 'login',
         element: <White>로그인 페이지</White>,
@@ -38,6 +40,7 @@ const router = createBrowserRouter([
       { path: 'movies/popular', element: <Popular /> },
       { path: 'movies/top-rated', element: <TopRated /> },
       { path: 'movies/up-coming', element: <UpComing /> },
+      { path: 'movie/:movieId', element: <MovieDetail /> },
     ],
   },
 ]);
