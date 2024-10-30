@@ -5,26 +5,22 @@ export const CardList = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-`
-export const CardContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
 `;
 
 export const CardWrapper = styled.div`
   margin: 10px;
+  cursor: pointer;
+
+  &:hover {
+      filter: brightness(0.9);
+    }
 `;
 
 export const CardPoster = styled.img`
     width: 150px;
     border-radius: 20px;
-    dispaly: flex;
+    display: flex;
     flex-direction: column;
-
-    &:hover {
-    filter: brightness(0.4);
-  }
 `;
 
 export const CardTitle = styled.h3`

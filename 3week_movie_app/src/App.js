@@ -1,8 +1,8 @@
+// App.js
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import RootLayout from './layout/root-layout';
-
 import HomePage from './components/Home/home';
 import Search from './components/Search/search';
 import Login from './components/Authentication/login';
@@ -14,57 +14,28 @@ import NowPlaying from './components/Movie/nowplaying';
 import Popular from './components/Movie/popular';
 import TopRated from './components/Movie/toprated';
 import UpComing from './components/Movie/upcoming';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RootLayout/>,
-    errorElement: <NotFound/>,
-    children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'signup',
-        element: <Signup />,
-      },
-      {
-        path: 'search',
-        element: <Search />,
-      },
-      {
-        path: 'category',
-        element: <Category />,
-        children: [
-          {
-            path: 'nowplaying',
-            element: <NowPlaying />,
-          },
-          {
-            path: 'popular',
-            element: <Popular />,
-          },
-          {
-            path: 'toprated',
-            element: <TopRated />,
-          },
-          {
-            path: 'upcoming',
-            element: <UpComing />,
-          }
-        ],
-      },
-    ],
-  },
-]);
+import MovieDetail from './components/Movie/Card/moviedetail';
 
 function App() {
-  return <RouterProvider router={router}/>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<RootLayout />} >
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/movie/:movieId" element={<MovieDetail />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/category/nowplaying" element={<NowPlaying />} />
+          <Route path="/category/popular" element={<Popular />} />
+          <Route path="/category/toprated" element={<TopRated />} />
+          <Route path="/category/upcoming" element={<UpComing />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

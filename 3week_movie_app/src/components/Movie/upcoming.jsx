@@ -3,30 +3,25 @@ import axios from 'axios'; // API 호출 관리
 
 import Card from './Card/card';
 import * as S from './Card/card.style';
+import useCustomFetch from '../../hooks/useCustomFetch';
 
-const UpComing = () => {
-    const [movies, setMovies] = useState([]);
-
-    useEffect(() => {
-        const getMovies = async () => {
-            const movies = await axios.get('https://api.themoviedb.org/3/movie/upcoming?language=ko-kr&page=1', {
-                headers: {
-                    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNTQwZjFhYzhiZjU2NTQ3ZDNkODMxOTEzYTVmMjBjYiIsIm5iZiI6MTcyODE0MTE4Mi4xMTkxNjgsInN1YiI6IjY3MDE1MmQ4NzgzMGMxMzAxZTdkMDcwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Qr9YbyFPWd8J5SSueQM_Xs178mcLMZ1VsNmH-6ci5gA`,
-                }
-            })
-            setMovies(movies);
-        }
-        getMovies();
-    }, []);
+const Upcoming = () => {
+    const {data: movies, isLoading, isError} = useCustomFetch(`/movie/upcoming?language=en-US&page=1`);
+    
+    if (isLoading) {
+        return <div style={{color: 'white'}}>로딩 중 입니다...</div>
+    }
+    if (isError || !movies?.results) {
+        return <div style={{color: 'white'}}>에러가 발생했습니다. 반복해서 발생 시 고객센터에 문의해주시기 바랍니다.</div>
+    }
 
     return (
         <S.CardList>
-            {movies.data?.results.map((movie) => (
+            {movies?.results.map((movie)=> (
                 <Card key={movie.id} movie={movie}/>
             ))}
         </S.CardList>
-    )
+    );
 };
 
-export default UpComing;
-
+export default Upcoming;

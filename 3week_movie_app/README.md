@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+# umc-7th-web
+💻 7th UMC Ewha Web Repository
+
+브랜치에서 챌린저별 스터디 미션 로그를 확인해 보세요 :)
+=======
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +74,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+>>>>>>> ba1b1e8 (week 5 complete)

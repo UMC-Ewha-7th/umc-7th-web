@@ -16,8 +16,8 @@ const Navbar = () => {
 
             <div className="nav-menu">
                     <ul>
-                    <li><Link to='/search'><span class="material-symbols-outlined search-icon">search</span>Search</Link></li>
-                    <li><Link to='/category'><span class="material-symbols-outlined movie-icon">movie</span>Movie</Link></li>
+                    <li><Link to='/search'><span className="material-symbols-outlined search-icon">search</span>Search</Link></li>
+                    <li><Link to='/category'><span className="material-symbols-outlined movie-icon">movie</span>Movie</Link></li>
                     </ul>
             </div>
         </nav>
