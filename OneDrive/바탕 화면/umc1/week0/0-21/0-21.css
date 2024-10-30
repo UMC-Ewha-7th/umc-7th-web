@@ -1,0 +1,13 @@
+.navbar{
+    display:flex;
+    justify-content: space-between;
+}
+.navbar .nav-links{
+    display:flex;
+    list-style:none;  
+}
+.navbar .nav-links a{
+    text-decoration: none;
+    color:black;
+    margin-right:30px;
+}
