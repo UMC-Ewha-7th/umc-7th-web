@@ -1,24 +1,14 @@
 import MovieCard from "../../components/MovieCard";
-import axios from 'axios';
-import API_KEY from '../../apikey';
-import { useState, useEffect } from 'react';
 import CardContainer from '../../components/CardContainer';
+import useCustomFetch from "../../hooks/useCustomFetch";
+import Loading from "../../components/Loading";
+import Error from "../../components/Error";
 
 const NowPlaying = () => {
-    const [movies, setMovies] = useState([]);
+    const {data:movies, isLoading, isError} = useCustomFetch(`/movie/now_playing?language=ko&page=1`);
+    if (isLoading) return <Loading />
+    if (isError) return <Error />
     
-    useEffect(() => {
-        const getMovies = async () => {
-            const movies = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?language=ko&page=1`, {
-                headers: {
-                    Authorization: `Bearer ${API_KEY}`,
-                }
-            });
-            setMovies(movies);
-        }
-        getMovies();
-    }, []);
-
     return (
         <>
             <CardContainer>
@@ -27,6 +17,7 @@ const NowPlaying = () => {
                     posterPath={movie.poster_path}
                     title={movie.title}
                     releaseDate={movie.release_date}
+                    movieId={movie.id}
                     />
                 ))}
             </CardContainer>

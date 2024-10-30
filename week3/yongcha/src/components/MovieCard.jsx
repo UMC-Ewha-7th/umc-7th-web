@@ -1,12 +1,22 @@
 // import { useState } from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom';
 
-const basePath = 'https://image.tmdb.org/t/p/w500';
+const basePath = import.meta.env.VITE_BASE_PATH;
 
-const MovieCard = ({posterPath, title, releaseDate}) => {
+const MovieCard = ({posterPath, title, releaseDate, movieId}) => {
+    const navigate = useNavigate();
+
     return (
         <MovieCardDiv>
-            <MoviePosterImg src={basePath+posterPath} />
+            <MoviePosterImg
+            src={basePath+posterPath}
+            onClick={() => {
+                navigate(`/movies/${movieId}`, {
+                    state: { movieId: movieId },
+                })
+            }}
+            />
             <MovieTitle>{title}</MovieTitle>
             <MovieDate>{releaseDate}</MovieDate>
         </MovieCardDiv>
