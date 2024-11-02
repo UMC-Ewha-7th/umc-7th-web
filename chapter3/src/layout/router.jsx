@@ -11,6 +11,7 @@ import NotFound from '../pages/not-found';
 import styled from 'styled-components';
 import HomePage from '../pages/home';
 import MovieDetail from '../pages/movie_detail';
+import TryLogin from '../pages/tryLogin';
 
 const White = styled.h2`
   color: white;
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       {
         path: 'login',
-        element: <White>로그인 페이지</White>,
+        element: <TryLogin />,
       },
       {
         path: 'signup',
