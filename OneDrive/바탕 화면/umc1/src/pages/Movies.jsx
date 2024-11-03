@@ -21,13 +21,19 @@ export default Movies;
 const Container = styled.div`
   padding: 20px;
   text-align: center;
+  width:100%;
+  margin:0 auto;
+
 `;
 
 const CategoryGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
   gap: 20px;
   padding: 20px;
+  width:100%;
+  justify-items:center;
+
 `;
 
 const CategoryItem = styled(Link)`

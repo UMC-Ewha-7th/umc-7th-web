@@ -16,13 +16,12 @@ const Navbar = () => {
 
 export default Navbar;
 
-// Styled components
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #333;
+  background-color: black;
 `;
 
 const Logo = styled(Link)`
@@ -42,7 +41,7 @@ const ButtonGroup = styled.div`
 `;
 
 const NavButton = styled(Link)`
-  background-color: #f39c12;
+  background-color: red;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 5px;

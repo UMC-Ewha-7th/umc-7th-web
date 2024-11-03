@@ -4,18 +4,19 @@ import MovieCard from './MovieCard.jsx';
 
 const MovieGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
   gap: 20px;
   padding: 20px;
+  width:100%;
 `;
 
-function MovieList({ movies }) {
-  console.log('movies:',movies);
+function MovieList({ movie }) {
+  console.log('movies:',movie);
   return (
     <MovieGrid>
-      {/* {movies.map((movie) => (
+      {movie.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
-      ))} */}
+      ))}
     </MovieGrid>
   );
 }

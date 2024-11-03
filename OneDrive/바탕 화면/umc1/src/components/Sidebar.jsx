@@ -5,7 +5,7 @@ import { FaFilm, FaSearch } from 'react-icons/fa';
 
 const SidebarContainer = styled.div`
   width: 200px;
-  background-color: #333;
+  background-color: black;
   height: 100vh;
   display: flex;
   flex-direction: column;

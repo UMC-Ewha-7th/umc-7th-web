@@ -1,32 +1,19 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import MovieCard from '../components/MovieCard.jsx'; // 경로 수정 필요할 수 있음
+import React from 'react';
+import MovieCard from '../../week2/2-2/src/components/MovieCard.jsx';
 import styled from 'styled-components';
+import useMovies from '../hooks/usemovies.jsx';
 
 function TopRated() {
-  const [movies, setMovies] = useState([]);
+  const { movies, loading, error } = useMovies('top_rated');
 
-  useEffect(() => {
-    const getMovies = async () => {
-      try {
-        const movies = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?language=ko&page=1`, {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OTUzMzRmN2FlZGRiYmYzZjFlNTdlNGFkNGFmZmE5YiIsIm5iZiI6MTcyODQ1MjE4MC42NzUwODMsInN1YiI6IjY3MDVkMzI5MDAwMDAwMDAwMDU4NmJiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xSt-mp-dfYvVhWAZ8wj7GEm8_nkfO-L1KWEfcIvdoCA`,
-          }
-        });
-        setMovies(movies);
-      } catch (error) {
-        console.error("영화 데이터를 불러오는 중 오류 발생: ", error);
-      }
-    };
-    getMovies();
-  }, []);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div>
-      <h2>높은 평가</h2>
+      <h2>높은 평가를 받은 영화</h2>
       <MovieGrid>
-        {movies.data?.results.map((movie) => (
+        {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </MovieGrid>
