@@ -1,0 +1,32 @@
+.navbar{   
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(43, 43, 43);
+    height: 50px;
+    padding-left:10px;
+    padding-right: 10px;
+}
+
+.navButton{
+    display:flex;
+    gap: 10px;
+}
+
+.sidebar{
+    position: fixed;
+    width: 150px;
+    height: 100%;
+    
+    overflow: hidden;
+
+    display: fixed;
+    flex-direction: column;
+    background-color: rgb(43, 43, 43);
+    padding-left: 10px;
+}
