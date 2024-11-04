@@ -41,18 +41,6 @@ const Error = styled.div`
 `;
 
 function TryLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'password') {
-      setPassword(value);
-    }
-  };
-
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -87,15 +75,11 @@ function TryLogin() {
 
         <Input
           placeholder="이메일을 입력해주세요!"
-          value={email}
-          onChange={(e) => handleChangeInput('email', e.target.value)}
           type="email"
           {...register('email')}
         />
         <Error>{errors.email?.message}</Error>
         <Input
-          value={password}
-          onChange={(e) => handleChangeInput('password', e.target.value)}
           placeholder="비밀번호를 입력해주세요!"
           type="password"
           {...register('password')}
