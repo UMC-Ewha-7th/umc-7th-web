@@ -1,0 +1,49 @@
+.todo-container {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+.todo-add {
+    display: flex;
+    justify-content: space-around;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.todo-list li {
+    display: flex;
+    justify-content: space-between; /* 글자와 버튼 그룹을 양쪽 끝으로 배치 */
+    align-items: center; /* 수직 중앙 정렬 */
+    margin-bottom: 10px;
+    width: 100%; /* 너비를 지정하여 공간 확보 */
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* 버튼 간의 간격을 설정 */
+}
+
+li input {
+    width: 60%;
+}
+
+.todo-list {
+    margin-top: 20px;
+    width: 100%; /* 리스트의 전체 너비를 사용 */
+}
+
