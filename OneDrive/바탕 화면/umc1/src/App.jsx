@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import GlobalStyles from './styles/GlobalStyles.js';
-import Navbar from './components/Navbar.jsx';
+import Navbar from './components/navbar.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import NowPlaying from './pages/NowPlaying.jsx';
 import Popular from './pages/Popular.jsx';
@@ -9,6 +9,8 @@ import TopRated from './pages/TopRated.jsx';
 import Upcoming from './pages/Upcoming.jsx';
 import Movies from './pages/Movies.jsx'; 
 import MovieDetails from './pages/MovieDetails.jsx';
+import SignupPage from './pages/SignupPage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/movies/top-rated" element={<TopRated />} />
           <Route path="/movies/upcoming" element={<Upcoming />} />
           <Route path="/movies/:movieId" element={<MovieDetails />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<NowPlaying />} />
         </Routes>
       </div>

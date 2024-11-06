@@ -1,80 +1,69 @@
 import { useState } from 'react';
-import './App.css';  // 스타일 파일 불러오기
-import Button from './components/button.jsx';
-import Input from './components/input.jsx';
+import './App.css';
+import Input from './components/input.jsx'; 
+import Button from './components/button.jsx'; 
 
 function App() {
     const [todos, setTodos] = useState([
         { id: 1, task: '투두 만들기' },
         { id: 2, task: '희연 혜원 혜윤 건 진민' },
     ]);
-    const [text, setText] = useState('');  // 새로 추가할 할 일의 텍스트
-    const [editingId, setEditingId] = useState('');  // 수정 중인 할 일 ID
-    const [editText, setEditText] = useState('');  // 수정할 할 일의 텍스트
+    const [text, setText] = useState('');
+    const [editingId, setEditingId] = useState('');
+    const [editText, setEditText] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();  // 폼 기본 동작 방지
-    };
-
+    // 1. 할 일 추가
     const addTodo = () => {
+        if (!text.trim()) return;
         setTodos((prev) => [
             ...prev,
             { id: Math.floor(Math.random() * 100) + 2, task: text },
         ]);
-        setText('');  // 입력 필드 초기화
+        setText('');
     };
 
+    // 2. 할 일 삭제
     const deleteTodo = (id) => {
         setTodos((prev) => prev.filter((item) => item.id !== id));
     };
 
+    // 3. 할 일 수정
     const updateTodo = (id, text) => {
         setTodos((prev) =>
             prev.map((item) => (item.id === id ? { ...item, task: text } : item))
         );
-        setEditingId('');  // 수정 완료 후 수정 상태 종료
+        setEditingId('');
     };
 
     return (
-        <div className="todo-container">  {/* 전체 ToDo List 컨테이너 */}
-            <form onSubmit={handleSubmit} className="todo-form">  {/* 입력 폼 */}
+        <>
+            <form onSubmit={(e) => e.preventDefault()}>
+                {/* Input 컴포넌트 사용 */}
                 <Input value={text} onChange={(e) => setText(e.target.value)} />
-                <Button onClick={addTodo} text="할 일 등록" />
+                {/* Button 컴포넌트 사용 */}
+                <Button onClick={addTodo}>할 일 등록</Button>
             </form>
-
-            <div className="todo-list">  {/* 할 일 목록 */}
+            <div>
                 {todos.map((todo) => (
-                    <div key={todo.id} className="todo-item">  {/* 각 할 일 항목 */}
+                    <div key={todo.id} style={{ display: 'flex', gap: '20px' }}>
                         {editingId !== todo.id ? (
-                            <>
+                            <div style={{ display: 'flex', gap: '5px' }}>
                                 <p>{todo.id}.</p>
                                 <p>{todo.task}</p>
-                            </>
+                                <Button onClick={() => deleteTodo(todo.id)}>삭제</Button>
+                                <Button onClick={() => setEditingId(todo.id)}>수정</Button>
+                            </div>
                         ) : (
-                            <>
+                            <div style={{ display: 'flex', gap: '5px' }}>
                                 <p>{todo.id}.</p>
-                                <Input
-                                    defaultValue={todo.task}
-                                    onChange={(e) => setEditText(e.target.value)}
-                                />
-                            </>
-                        )}
-                        <Button onClick={() => deleteTodo(todo.id)} text="삭제하기" />
-                        {editingId === todo.id ? (
-                            <Button
-                                onClick={() => updateTodo(todo.id, editText)}
-                                text="수정 완료"
-                            />
-                        ) : (
-                            <Button
-                                onClick={() => setEditingId(todo.id)}
-                                text="수정 진행"
-                            />
+                                <Input value={editText} onChange={(e) => setEditText(e.target.value)} />
+                                <Button onClick={() => updateTodo(todo.id, editText)}>수정 완료</Button>
+                            </div>
                         )}
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 }
 

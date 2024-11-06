@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Button({ onClick, text }) {
-    return (
-        <button className="todo-button" onClick={onClick}>  {/* 버튼 스타일 클래스 */}
-            {text}
-        </button>
-    );
-}
+const Button = ({ onClick, children }) => {
+  return (
+    <button onClick={onClick} className="todo-button">
+      {children}
+    </button>
+  );
+};
 
 export default Button;
