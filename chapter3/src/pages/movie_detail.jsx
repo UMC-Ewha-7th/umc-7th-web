@@ -99,7 +99,7 @@ function MovieDetail() {
 
   console.log('API에서 받아온 영화 응답 데이터:', movieInfo);
   if (movieInfo) {
-    console.log('API에서 받아온 영화 포스터 데이터:', movie.backdrop_path);
+    console.log('API에서 받아온 영화 포스터 데이터:', movie.title);
   }
 
   const { data: castInfo } = useCustomFetch(
@@ -129,7 +129,7 @@ function MovieDetail() {
       <Container>
         <Poster src={`${base_url}${file_size}${movie.poster_path}`} />
         <Detail>
-          <Title>{movie.original_title}</Title>
+          <Title>{movie.title}</Title>
           <div>평균 {movie.vote_average}</div>
           <div> {movie.release_date}</div>
           <div> {movie.runtime}분</div>

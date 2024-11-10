@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import React from 'react';
 
@@ -12,6 +12,7 @@ const NavButton = styled.button`
   border: 1px solid white;
   padding: 5px;
   background-color: ${(props) => props.color};
+  color: white;
   &:hover {
     background-color: hsl(
       216.22641509433961,
@@ -42,6 +43,8 @@ const StyledLink = styled(Link)`
 `;
 
 function Navbar() {
+  const navigate = useNavigate();
+
   return (
     <Bar>
       <YONGCHA>
@@ -50,10 +53,16 @@ function Navbar() {
         </StyledLink>
       </YONGCHA>
       <AllButton>
-        <NavButton color={'#ee51b2'}>
-          <StyledLink color={'white'} to={'/login'}>
-            로그인
-          </StyledLink>
+        <NavButton
+          color={'#ee51b2'}
+          onClick={() => (
+            navigate('/login'),
+            {
+              replace: false,
+            }
+          )}
+        >
+          로그인
         </NavButton>
         <NavButton color={'pink'}>
           <StyledLink color={'white'} to={'/signup'}>
