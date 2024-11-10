@@ -4,6 +4,8 @@
     left: 0;
     right: 0;
 
+    z-index: 999;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,6 +18,7 @@
 .navButton{
     display:flex;
     gap: 10px;
+    align-items: center;
 }
 
 .sidebar{

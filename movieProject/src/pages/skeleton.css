@@ -1,0 +1,15 @@
+.skeleton{
+  background: #ddd;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.skeleton.poster{
+  width: 150px;
+  height: 225px;
+}
+
+.skeleton.title{
+  width: 100%;
+  
+}

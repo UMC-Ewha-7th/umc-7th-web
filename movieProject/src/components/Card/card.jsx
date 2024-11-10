@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import '../../pages/skeleton.css'
 
 const Card = (props) =>{
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Card = (props) =>{
 
     return(
         <MovieCard onClick={cardClick}>
-            <img src={"https://image.tmdb.org/t/p/w1280/" + props.poster_path}/>
+            <img src={"https://image.tmdb.org/t/p/w1280/" + props.poster_path} />
             <p> {props.title} </p>
             <p>{props.release_date}</p>
         </MovieCard>
@@ -29,6 +30,7 @@ const MovieCard = styled.div`
         font-size:0.8em;
         word-wrap: break-word;
         color: #f0f0f0;
+        text-align: left;
     }
     
     img{

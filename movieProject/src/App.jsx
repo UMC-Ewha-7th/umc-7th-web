@@ -1,5 +1,4 @@
 import './App.css'
-
 import{createBrowserRouter, RouterProvider} from "react-router-dom";
 import styled from "styled-components";
 
@@ -9,7 +8,6 @@ import SearchPage from './pages/search.jsx';
 import MoviesPage from './pages/movies.jsx';
 import Category from './pages/category.jsx';
 import Login from './pages/login.jsx';
-import LoginPage from './pages/login2.jsx';
 import SignUp from './pages/signup.jsx';
 import RootLayout from './layout/root-layout.jsx';
 
@@ -60,7 +58,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <LoginPage/>
+        element: <Login/>
       },
       {
         path: 'signup',
