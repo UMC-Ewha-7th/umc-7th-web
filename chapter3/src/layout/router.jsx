@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import HomePage from '../pages/home';
 import MovieDetail from '../pages/movie_detail';
 import Login from '../pages/Login';
+import SignUp from '../pages/signUp';
 
 const White = styled.h2`
   color: white;
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'signup',
-        element: <White>회원가입 페이지</White>,
+        element: <SignUp />,
       },
       {
         path: 'search',
