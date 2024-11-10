@@ -2,6 +2,8 @@ import styled from "styled-components";
 import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
     const schema = yup.object().shape({
@@ -11,14 +13,32 @@ const SignUp = () => {
         '비밀번호가 일치하지 않습니다.')
     });
 
-    const {register, handleSubmit, formState:{errors}} = useForm({
+    const {register, handleSubmit, formState:{errors, isValid}} = useForm({
         resolver: yupResolver(schema)
     });
 
-    const onSubmit = (data) => {
-        console.log('폼 데이터 제출')
-        console.log(data);
+    const navigate = useNavigate();
+
+    const onSubmit = async (data) => {
+        try {
+            const request = await axios.post('http://localhost:3000/auth/register', {
+              email: data.email,
+              password: data.password,
+              passwordCheck: data.passwordCheck,
+            }, { headers: { 'Content-Type': 'application/json' }});
+            console.log(data);
+
+            alert('회원가입 성공!');
+            navigate('/login', {});
+            // 필요 시 로그인 페이지로 리디렉션
+        }
+        catch (error) {
+            console.error('회원가입 실패:', error);
+            alert('회원가입에 실패했습니다.');
+        }
     }
+
+
 
     return(
         <div>
@@ -33,7 +53,7 @@ const SignUp = () => {
                 <Input type={'password'}{...register("passwordCheck")} placeholder="비밀번호를 다시 입력해주세요" />
                 <ErrorText> {errors.passwordCheck?.message} </ErrorText>
                 
-                <input class='InputB' type={'submit'}/>
+                <InputB type={'submit'} disabled={!isValid}/>
             </SignUpForm>
         </div>
     );
@@ -46,13 +66,6 @@ const SignUpForm = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    .InputB{
-        width: 316px;
-        background-color: #FFDD1A;
-        border-radius: 4px;
-        padding: 8px;
-    }
 `
 const Input = styled.input`
     margin: 10px 0;
@@ -60,7 +73,7 @@ const Input = styled.input`
     width: 300px;
     border-radius: 4px;
 
-    border: ${props => props.error ? '3px solid red' : '1px solid #CCC'};
+    border: ${(props) => (props.error ? '3px solid red' : '1px solid #CCC')};
     &:focus{
         border-color:#FFDD1A;
     }
@@ -69,5 +82,11 @@ const ErrorText = styled.h5`
     color: red;
     margin: 0px;
 `
+const InputB = styled.input`
+    width: 316px;
+    background-color: #FFDD1A;
+    border-radius: 4px;
+    padding: 8px;
 
+`
 export default SignUp;
