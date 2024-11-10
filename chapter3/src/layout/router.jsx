@@ -11,7 +11,7 @@ import NotFound from '../pages/not-found';
 import styled from 'styled-components';
 import HomePage from '../pages/home';
 import MovieDetail from '../pages/movie_detail';
-import TryLogin from '../pages/tryLogin';
+import Login from '../pages/Login';
 
 const White = styled.h2`
   color: white;
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       {
         path: 'login',
-        element: <TryLogin />,
+        element: <Login />,
       },
       {
         path: 'signup',
