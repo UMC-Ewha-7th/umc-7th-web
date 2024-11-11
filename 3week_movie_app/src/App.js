@@ -1,6 +1,6 @@
-// App.js
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AuthProvider from './context/AuthContext'; // AuthProvider 가져오기
 
 import RootLayout from './layout/root-layout';
 import HomePage from './components/Home/home';
@@ -18,23 +18,25 @@ import MovieDetail from './components/Movie/Card/moviedetail';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<RootLayout />} >
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/movie/:movieId" element={<MovieDetail />} />
-          <Route path="/category" element={<Category />} />
-          <Route path="/category/nowplaying" element={<NowPlaying />} />
-          <Route path="/category/popular" element={<Popular />} />
-          <Route path="/category/toprated" element={<TopRated />} />
-          <Route path="/category/upcoming" element={<UpComing />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider> {/* AuthProvider로 감싸기 */}
+      <BrowserRouter>
+        <Routes>
+          <Route element={<RootLayout />} >
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/movie/:movieId" element={<MovieDetail />} />
+            <Route path="/category" element={<Category />} />
+            <Route path="/category/nowplaying" element={<NowPlaying />} />
+            <Route path="/category/popular" element={<Popular />} />
+            <Route path="/category/toprated" element={<TopRated />} />
+            <Route path="/category/upcoming" element={<UpComing />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -70,7 +70,7 @@ nav {
     color: inherit;
 }
 
-.btn-login, .btn-signup {
+.btn-login, .btn-signup, .btn-profile, .btn-logout {
     text-decoration: none;
     cursor: pointer;
     color: var(--text-color);
@@ -79,12 +79,15 @@ nav {
     border-radius: 15px;
     padding: 10px;
 }
+.btn-logout {
+    background-color: var(--backgroud-color);
+}
 .btn-login {
     margin: 10px;
     position: relative;
     border: 1px solid gray;
 }
-.btn-signup {   
+.btn-signup, .btn-profile {   
     margin-right: 10px;
     background-color: var(--logo-color);
 }
@@ -93,4 +96,10 @@ nav {
 }
 .btn-login:active, .btn-signup:active{
     filter: brightness(0.3);
+}
+
+.nickname-message {
+    color: var(--text-color);
+    font-weight: bold;
+    margin-right: 10px;
 }

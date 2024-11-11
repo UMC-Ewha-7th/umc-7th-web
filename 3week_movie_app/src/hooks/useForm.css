@@ -1,5 +1,7 @@
+@import '../components/variable.css';
 
-/* form {
+/* Form 스타일 */
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,12 +10,13 @@
     padding: 2rem;
 }
 
-h2 {
+/* 제목 스타일 */
+.form-title {
     color: var(--text-color);
-} */
+}
 
-input[type="email"],
-input[type="password"] {
+/* 이메일 및 패스워드 입력 필드 스타일 */
+form .input {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
@@ -22,18 +25,21 @@ input[type="password"] {
     font-size: 1rem;
 }
 
+/* 에러 스타일 */
 .error-border {
     border: 1px solid var(--logo-color) !important;
 }
+
 .error-border:focus {
     border: 1px solid var(--logo-color);
 }
 
-input[type="email"]:focus:not(.error-border),
-input[type="password"]:focus:not(.error-border) {
+/* 포커스 상태 스타일 */
+.input:focus:not(.error-border) {
     border-color: var(--navbar-color);
 }
 
+/* 공통 버튼 스타일 */
 .button {
     width: 100%;
     padding: 10px;
@@ -46,17 +52,21 @@ input[type="password"]:focus:not(.error-border) {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .button:hover {
     filter: brightness(0.6);
 }
+
 .button:disabled,
 .disabled-button {
     background-color: gray;
     cursor: not-allowed;
 }
 
+/* 에러 메시지 텍스트 스타일 */
 .alert {
     margin: 0;
     font-size: 0.9rem;
     color: red;
 }
+

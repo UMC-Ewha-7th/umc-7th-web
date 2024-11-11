@@ -1,6 +1,8 @@
 import React from 'react';
-import * as S from '../Card/card.style';
 import { useNavigate } from 'react-router-dom';
+
+import styled from 'styled-components';
+import '../../variable.css';
 
 const Card = ({movie}) => {
     const navigate = useNavigate();
@@ -14,15 +16,50 @@ const Card = ({movie}) => {
 
     return (
         <>     
-        <S.CardWrapper key={movie.id} onClick={handleCardClick}>
-                <S.CardPoster
+        <CardWrapper key={movie.id} onClick={handleCardClick}>
+                <CardPoster
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     alt={`${movie.title} Poster`}/>
-                <S.CardTitle>{movie.title}</S.CardTitle>
-                <S.CardReleaseDate>{movie.release_date}</S.CardReleaseDate>
-        </S.CardWrapper>
+                <CardTitle>{movie.title}</CardTitle>
+                <CardReleaseDate>{movie.release_date}</CardReleaseDate>
+        </CardWrapper>
         </>
     );
 }; 
 
 export default Card;
+
+export const CardList = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+`;
+
+export const CardWrapper = styled.div`
+  margin: 10px;
+  cursor: pointer;
+
+  &:hover {
+      filter: brightness(0.9);
+    }
+`;
+
+export const CardPoster = styled.img`
+    width: 150px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const CardTitle = styled.h3`
+  font-size: 15px;
+  color: var(--text-color);
+
+  width: 150px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+`;
+
+export const CardReleaseDate = styled.p`
+  color: var(--text-color);
+`;

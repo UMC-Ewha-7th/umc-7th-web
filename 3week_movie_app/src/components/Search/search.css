@@ -1,0 +1,84 @@
+@import '../variable.css';
+
+/* 폼 스타일 */
+form {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+form input[type="text"], form button[type="submit"] {
+    display: inline;
+}
+
+/* 입력 필드 스타일 */
+form input[type="text"] {
+    flex: 1;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid var(--main-background-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* 버튼 스타일 */
+form button[type="submit"] {
+    width: 20%;
+    padding: 10px;
+    margin-top: 16px;
+    background-color: var(--logo-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* 검색 결과 영역 스타일 */
+.search-results {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+/* 각 영화 항목 스타일 */
+.movie-item {
+    margin: 10px;
+    cursor: pointer;
+    width: 150px;
+    text-align: center;
+    &:hover {
+      filter: brightness(0.9);
+    }
+}
+
+/* 영화 제목 스타일 */
+.movie-item h3 {
+    font-size: 15px;
+    color: var(--text-color);
+    width: 150px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* 영화 포스터 이미지 스타일 */
+.movie-item img {
+    width: 150px;
+    height: 226px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+/* 개봉일과 평점 텍스트 스타일 */
+.movie-item p {
+    color: var(--text-color);
+}
+
+.search-results p {
+    color: var(--text-color);
+    font-size: 20px;
+}

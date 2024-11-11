@@ -8,6 +8,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.1",
@@ -18,10 +22,11 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:dev": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
@@ -40,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "<<<<<<< HEAD # umc-7th-web 💻 7th UMC Ewha Web Repository",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

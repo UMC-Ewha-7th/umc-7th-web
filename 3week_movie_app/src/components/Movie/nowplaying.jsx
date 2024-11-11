@@ -2,8 +2,7 @@
 import React, {useState, useEffect} from 'react'; // 데이터를 비동기로 가져옴
 import axios from 'axios'; // API 호출 관리
 
-import Card from './Card/card';
-import * as S from './Card/card.style';
+import Card, {CardList} from './Card/card';
 import useCustomFetch from '../../hooks/useCustomFetch';
 
 const NowPlaying = () => {
@@ -17,11 +16,11 @@ const NowPlaying = () => {
     }
 
     return (
-        <S.CardList>
+        <CardList>
             {movies?.results.map((movie)=> (
                 <Card key={movie.id} movie={movie} />
             ))}
-        </S.CardList>
+        </CardList>
     );
 };
 

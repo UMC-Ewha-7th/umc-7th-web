@@ -18,15 +18,33 @@ h2 {
     color: var(--text-color);
 }
 
+.form-group-inline {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 8px 0;
+}
+.input-inline,
 input[type="email"],
 input[type="password"],
-input[type="password-repeat"] {
-    width: 100%;
+input[type="password-repeat"],
+select {
+    flex: 1;
     padding: 10px;
-    margin: 8px 0;
-    border: 1px solid var(--main-background-color);
+    border: 1px solid 
+var(--main-background-color);
     border-radius: 4px;
     font-size: 1rem;
+    box-sizing: border-box;
+}
+.label-inline{
+    width: 80px;
+    font-size: 1rem;
+    color: var(--text-color);
+    text-align: right;
+
+    margin-bottom: 8px;
+    margin-right:8px;
 }
 
 .error-border {
@@ -37,7 +55,10 @@ input[type="password-repeat"] {
 }
 
 input[type="email"]:focus:not(.error-border),
-input[type="password"]:focus:not(.error-border) {
+input[type="password"]:focus:not(.error-border) 
+input[type="date"]:focus:not(.error-border),
+.input-inline:focus:not(.error-border),
+select:focus:not(.error-border){
     border-color: var(--navbar-color);
 }
 
@@ -62,9 +83,9 @@ input[type="submit"]:disabled,
     cursor: not-allowed;
 }
 
-
 .alert {
     margin: 0;
     font-size: 0.9rem;
     color: red;
 }
+
