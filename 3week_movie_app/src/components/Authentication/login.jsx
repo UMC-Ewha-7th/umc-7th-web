@@ -24,6 +24,9 @@ const Login = () => {
             console.log('Response received:', response.data);
 
             if (response.data.accessToken && response.data.refreshToken) {
+                localStorage.setItem('accessToken', response.data.accessToken);
+                localStorage.setItem('refreshToken', response.data.refreshToken);
+                
                 const nickname = data.email.split('@')[0];
                 localStorage.setItem('nickname', nickname);
                 
