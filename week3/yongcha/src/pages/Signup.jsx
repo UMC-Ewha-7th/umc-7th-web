@@ -3,6 +3,8 @@ import WhiteTitle from "../components/WhiteTitle";
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import Style from '../components/styled-form';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const schema = yup.object().shape({
     email: yup
@@ -21,13 +23,29 @@ const schema = yup.object().shape({
 });
 
 const Signup = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const {register, handleSubmit, formState: {errors, isValid}} = useForm({
+        mode: 'onChange',
         resolver: yupResolver(schema)
     });
 
-    const onSubmit = (data) => {
-        console.log('submit');
-        console.log(data);
+    const navigate = useNavigate();
+
+    const onSubmit = async (data) => {
+        try {
+            const request = await axios.post('http://localhost:3000/auth/register', {
+                email: data.email,
+                password: data.password,
+                passwordCheck: data.passwordCheck,
+            }, { headers: { 'Content-Type': 'application/json' }});
+            console.log(data);
+
+            alert('회원가입 성공');
+            navigate('/login', {});
+        }
+        catch (error) {
+            console.error('회원가입 실패:', error);
+            alert('회원가입 실패');
+        }
     }
 
     return (
@@ -49,7 +67,7 @@ const Signup = () => {
                 {...register("passwordCheck")} />
                 <Style.ErrorMessage style={{color: 'red'}}>{errors.passwordCheck?.message}</Style.ErrorMessage>
                 
-                <Style.SubmitInput type={'submit'} />
+                <Style.SubmitInput disabled={!isValid} type={'submit'} />
             </form>
         </Style.CenterDiv>
     );
