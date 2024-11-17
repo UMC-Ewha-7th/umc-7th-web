@@ -3,14 +3,12 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
-function SignUp() {
+function signUp() {
   //React Hook Form은 내부적으로 상태를 관리하기 때문에 useState로 별도의 상태를 유지할 필요가 없다.
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
-  // const [passwordCheck, setpasswordCheck] = useState('');
+  // const [confirmPassword, setConfirmPassword] = useState('');
 
   // const handleChangeInput = (e) => {
   //   const { name, value } = e.target;
@@ -19,10 +17,9 @@ function SignUp() {
   //   } else if (name === 'password') {
   //     setPassword(value);
   //   } else {
-  //     setpasswordCheck(value);
+  //     setConfirmPassword(value);
   //   }
   // };
-  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     email: yup
@@ -38,7 +35,7 @@ function SignUp() {
       .required('비밀번호를 입력해주세요!')
       .min(8, '비밀번호는 8자 이상이어야 합니다!')
       .max(16, '비밀번호는 16자 이하여야 합니다!'),
-    passwordCheck: yup
+    confirmPassword: yup
       .string()
       .required('비밀번호를 한번 더 입력해 주세요')
       // oneOf()는 지정된 값 중 하나와 일치해야 함을 나타내며, password와 비교한다.
@@ -48,6 +45,7 @@ function SignUp() {
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors, isValid },
   } = useForm({
@@ -55,26 +53,11 @@ function SignUp() {
     mode: 'onChange', // 입력 값 변경 시 유효성 검사 결과 반영
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     console.log(data.email);
     console.log(data.password);
-    console.log(data.passwordCheck);
-
-    const requestData = { ...data };
-    console.log('회원가입 요청 데이터:', requestData);
-
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/auth/register',
-        requestData
-      );
-      console.log('회원가입 완료: ', response.data);
-
-      navigate('/login');
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    console.log(data.confirmPassword);
+    reset();
   };
 
   // 모든 입력 값을 추적
@@ -82,7 +65,7 @@ function SignUp() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <SignUps>
+      <SignUp>
         <Title>회원가입</Title>
 
         <Input
@@ -102,18 +85,16 @@ function SignUp() {
         />
         <Error>{errors.password?.message}</Error>
         <Input
-          // value={passwordCheck}
-          // onChange={(e) => handleChangeInput('passwordCheck', e.target.value)}
+          // value={confirmPassword}
+          // onChange={(e) => handleChangeInput('confirmPassword', e.target.value)}
           placeholder="비밀번호를 다시 입력해주세요!"
           type="password"
-          {...register('passwordCheck')}
+          {...register('confirmPassword')}
         />
-        <Error>{errors.passwordCheck?.message}</Error>
+        <Error>{errors.passwordConfirm?.message}</Error>
 
-        <SignUpButton disabled={!isValid} type="submit">
-          제출
-        </SignUpButton>
-      </SignUps>
+        <SignUpButton disabled={!isValid}>제출</SignUpButton>
+      </SignUp>
     </form>
   );
 }
@@ -134,7 +115,7 @@ const Title = styled.h1`
   color: white;
 `;
 
-const SignUps = styled.div`
+const SignUp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -154,5 +135,4 @@ const Error = styled.div`
   text-align: left;
   margin: -5px;
 `;
-
-export default SignUp;
+export default signUp;
