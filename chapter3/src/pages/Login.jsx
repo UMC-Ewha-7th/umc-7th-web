@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import useForm from '../hooks/use-form';
 import { ValidateLogin } from '../utils/validate';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Login() {
+  const navigate = useNavigate();
+
   const login = useForm({
     initialValue: {
       email: '',
@@ -14,8 +18,37 @@ function Login() {
 
   console.log(login.values, login.errors, login.touched);
 
-  const handlePressLogin = () => {
+  const handlePressLogin = async () => {
     console.log(login.values.email, login.values.password);
+
+    const requestData = {
+      email: login.values.email,
+      password: login.values.password,
+    };
+
+    console.log('로그인 요청 데이터: ', requestData);
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/auth/login',
+        requestData
+      );
+
+      const refreshToken = response.data.refreshToken;
+      const accessToken = response.data.accessToken;
+
+      // 액세스 토큰을 로컬 스토리지에 저장
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+
+      console.log('AccessToken:', localStorage.getItem('accessToken'));
+      console.log('refreshToken:', localStorage.getItem('refreshToken'));
+
+      navigate('/');
+    } catch (error) {
+      console.error('소셜 로그인 에러', error);
+      window.alert('로그인에 실패하였습니다.');
+    }
   };
 
   return (
