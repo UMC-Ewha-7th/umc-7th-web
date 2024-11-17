@@ -69,7 +69,7 @@ function TryLogin() {
   };
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Login>
         <Title>로그인</Title>
 
