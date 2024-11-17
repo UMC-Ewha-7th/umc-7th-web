@@ -13,6 +13,7 @@ import HomePage from '../pages/home';
 import MovieDetail from '../pages/movie_detail';
 import Login from '../pages/Login';
 import SignUp from '../pages/signUp';
+import Search from '../pages/search';
 
 const White = styled.h2`
   color: white;
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'search',
-        element: <White>검색페이지</White>,
+        element: <Search />,
       },
       { path: 'movies', element: <Movies /> },
       { path: 'movies/now-playing', element: <NowPlaying /> },
