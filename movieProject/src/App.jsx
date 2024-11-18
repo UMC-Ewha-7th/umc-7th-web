@@ -1,6 +1,7 @@
 import './App.css'
 import{createBrowserRouter, RouterProvider} from "react-router-dom";
 import styled from "styled-components";
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 import HomePage from './pages/home.jsx';
 import NotFound from './pages/not-found.jsx';
@@ -70,9 +71,15 @@ const router = createBrowserRouter([
 ])
 
 function App(){
-  return <Mainpage> 
+  const queryClient = new QueryClient();
+  
+  return(
+    <QueryClientProvider client={queryClient}>
+      <Mainpage> 
       <RouterProvider router={router}/>     
-    </Mainpage>
+      </Mainpage>
+    </QueryClientProvider>
+  ) 
 }
 
 const Mainpage = styled.div`
