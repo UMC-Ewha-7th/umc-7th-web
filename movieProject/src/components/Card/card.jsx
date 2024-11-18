@@ -1,23 +1,25 @@
 import { useNavigate } from "react-router-dom";
+import { forwardRef } from "react";
 import styled from "styled-components";
 import '../../pages/skeleton.css'
 
-const Card = (props) =>{
+const Card = forwardRef((props, ref) => {
     const navigate = useNavigate();
     const cardClick = () => {
         navigate('/movies/'+ props.Id, {
             replace: false,
-            state: { MovieId: props.Id }});
+            state: { MovieId: props.Id },
+        });
     };
 
     return(
-        <MovieCard onClick={cardClick}>
+        <MovieCard ref={ref} onClick={cardClick}>
             <img src={"https://image.tmdb.org/t/p/w1280/" + props.poster_path} />
             <p> {props.title} </p>
             <p>{props.release_date}</p>
         </MovieCard>
-    )
-};
+    );
+});
 
 const MovieCard = styled.div`
     display: flex;
