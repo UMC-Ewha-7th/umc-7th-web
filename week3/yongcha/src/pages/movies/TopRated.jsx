@@ -1,26 +1,58 @@
 import MovieCard from "../../components/MovieCard";
 import CardContainer from '../../components/CardContainer';
-import useCustomFetch from "../../hooks/useCustomFetch";
-import Loading from "../../components/Loading";
 import Error from "../../components/Error";
+import SkeletonCard from "../../components/SkeletonCard";
+import useGetInfinite from "../../hooks/useGetInfinite";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+import SyncLoader from "react-spinners/SyncLoader";
 
 const TopRated = () => {
-    const {data:movies, isLoading, isError} = useCustomFetch(`/movie/top_rated?language=ko&page=1`);
-    if (isLoading) return <Loading />
+    const {
+        data:movies,
+        isLoading,
+        isError,
+        isFetching,
+        hasNextPage,
+        fetchNextPage
+    } = useGetInfinite({category:'top_rated'});
+    const {ref, inView} = useInView({
+        threshold: 0,
+    })
+
+    useEffect(() => {
+        if (inView) {
+            !isFetching && hasNextPage && fetchNextPage();
+        }
+    }, [inView, isFetching, hasNextPage, fetchNextPage]);
+    if (isLoading) return (
+        <>
+        <CardContainer>
+            {Array(18).fill().map((v,i) => (
+                <SkeletonCard key={i}/>
+            ))}
+        </CardContainer>
+        </>
+    )
     if (isError) return <Error />
 
     return (
         <>
             <CardContainer>
-                {movies.data?.results.map((movie) => (
-                    <MovieCard key={movie.id}
-                    posterPath={movie.poster_path}
-                    title={movie.title}
-                    releaseDate={movie.release_date}
-                    movieId={movie.id}
-                    />
-                ))}
+                {movies?.pages.map((page) => {
+                    return page.results.map((movie) => (
+                        <MovieCard key={movie.id}
+                        posterPath={movie.poster_path}
+                        title={movie.title}
+                        releaseDate={movie.release_date}
+                        movieId={movie.id}
+                        />
+                    ))
+                })}
             </CardContainer>
+            <div ref={ref}>
+                {isFetching && <SyncLoader color="white" />}
+            </div>
         </>
     );
 };
