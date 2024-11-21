@@ -3,6 +3,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import useCustomFetch from '../hooks/useCustomFetch.js';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { useGetMovies } from '../hooks/queries/useGetMovies.js';
+import CardListSkeleton from '../components/Skeleton/card-list-skeleton.jsx';
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const movieKey = import.meta.env.VITE_MOVIE_API_URL;
@@ -34,6 +37,14 @@ const Date = styled.p`
   margin: 2px;
 `;
 
+const MovieContainer = styled.div`
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 25px;
+  padding: 20px;
+`;
+
 function UpComing() {
   const base_url = 'https://image.tmdb.org/t/p/';
   const file_size = 'w200/';
@@ -41,20 +52,31 @@ function UpComing() {
 
   // const [movies, setMovies] = useState([]);
 
+  // const {
+  //   data: movies,
+  //   isLoading,
+  //   isError,
+  // } = useCustomFetch(`/movie/upcoming?language=ko-KR&page=1`);
+
   const {
     data: movies,
-    isLoading,
+    isPending,
     isError,
-  } = useCustomFetch(`/movie/upcoming?language=ko-KR&page=1`);
+  } = useQuery({
+    queryKey: ['movies', 'up-coming'],
+    queryFn: () => useGetMovies({ category: 'up-coming', pageParam: 1 }),
+    cacheTime: 10000,
+    staleTime: 10000,
+  });
 
-  if (isLoading) {
+  if (isPending) {
     return (
-      <div>
-        <h1 style={{ color: 'white' }}>로딩 중입니다...</h1>
-      </div>
+      <MovieContainer>
+        {' '}
+        <CardListSkeleton />
+      </MovieContainer>
     );
   }
-
   if (isError) {
     return (
       <div>
@@ -89,7 +111,7 @@ function UpComing() {
   return (
     <>
       <Container>
-        {movies.data?.results.map((movie) => (
+        {movies?.results.map((movie) => (
           <div key={movie.id}>
             <ContainerImg
               src={`${base_url}${file_size}${movie.poster_path}`}

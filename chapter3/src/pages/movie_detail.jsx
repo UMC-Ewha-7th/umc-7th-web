@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import useCustomFetch from '../hooks/useCustomFetch';
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
+import { axiosInstance } from '../apis/axios-instance';
 
 const Container = styled.div`
   position: relative;
@@ -87,28 +89,64 @@ function MovieDetail() {
   const { movieId } = useParams();
   console.log('movieId:', movieId);
 
+  // const {
+  //   data: movieInfo,
+  //   isLoading,
+  //   isError,
+  // } = useCustomFetch(
+  //   `/movie/${movieId}?language=ko-KR&append_to_response=images`
+  // );
+
+  const useGetMovie = async () => {
+    const { data } = await axiosInstance.get(
+      `/movie/${movieId}?language=ko-KR&append_to_response=images`
+    );
+    return data;
+  };
+
+  const useGetCast = async () => {
+    const { data } = await axiosInstance.get(
+      `/movie/${movieId}/credits?language=ko-KR`
+    );
+    return data;
+  };
+
   const {
     data: movieInfo,
-    isLoading,
-    isError,
-  } = useCustomFetch(
-    `/movie/${movieId}?language=ko-KR&append_to_response=images`
-  );
+    isLoading: detailLoading,
+    isError: detailError,
+  } = useQuery({
+    queryKey: [`movieInfo`, 'movie_detail'],
+    queryFn: () => useGetMovie(),
+    cacheTime: 10000,
+    staleTime: 10000,
+  });
 
-  const movie = movieInfo && movieInfo.data ? movieInfo.data : [];
+  const movie = movieInfo;
 
   console.log('API에서 받아온 영화 응답 데이터:', movieInfo);
   if (movieInfo) {
     console.log('API에서 받아온 영화 포스터 데이터:', movie.title);
   }
 
-  const { data: castInfo } = useCustomFetch(
-    `/movie/${movieId}/credits?language=ko-KR`
-  );
+  // const { data: castInfo } = useCustomFetch(
+  //   `/movie/${movieId}/credits?language=ko-KR`
+  // );
+
+  const {
+    data: castInfo,
+    isLoading: castLoading,
+    isError: castError,
+  } = useQuery({
+    queryKey: [`castInfo`],
+    queryFn: () => useGetCast(),
+    cacheTime: 10000,
+    staleTime: 10000,
+  });
 
   console.log('API에서 받아온 캐스팅 응답 데이터:', castInfo);
 
-  if (isLoading) {
+  if (detailLoading || castLoading) {
     return (
       <div>
         <h1 style={{ color: 'white' }}>로딩 중입니다...</h1>
@@ -116,7 +154,7 @@ function MovieDetail() {
     );
   }
 
-  if (isError) {
+  if (detailError || castError) {
     return (
       <div>
         <h1 style={{ color: 'white' }}>에러 발생</h1>
@@ -139,7 +177,7 @@ function MovieDetail() {
         <CastContiner>
           <h2>감독/출연</h2>
           <CastList>
-            {castInfo.data?.cast.map((casting) => (
+            {castInfo?.cast.map((casting) => (
               <Card key={casting.id}>
                 <CastImg
                   src={`${base_url}${file_size}${casting.profile_path}`}

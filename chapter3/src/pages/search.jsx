@@ -3,6 +3,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import useCustomFetch from '../hooks/useCustomFetch';
 import CardListSkeleton from '../components/Skeleton/card-list-skeleton';
+import { axiosInstance } from '../apis/axios-instance';
+import { useQuery } from '@tanstack/react-query';
 
 function Search() {
   const navigate = useNavigate();
@@ -32,15 +34,27 @@ function Search() {
 
   console.log('검색값: ', searchValue);
 
-  const {
-    data: movies,
-    isLoading,
-    isError,
-  } = useCustomFetch(
-    `/search/movie?query=${searchValue}&include_adult=false&language=ko-KR&page=1`
-  );
+  const useGetSearch = async () => {
+    const { data } = await axiosInstance.get(
+      `/search/movie?query=${searchValue}&include_adult=false&language=ko-KR&page=1`
+    );
+    return data;
+  };
 
-  console.log('영화 데이터: ', movies);
+  // const {
+  //   data: movies,
+  //   isLoading,
+  //   isError,
+  // } = useCustomFetch(
+  //   `/search/movie?query=${searchValue}&include_adult=false&language=ko-KR&page=1`
+  // );
+
+  const { data: movieSearch, isLoading } = useQuery({
+    queryKey: ['movieSearch'],
+    queryFn: () => useGetSearch(),
+    cacheTime: 10000,
+    staleTime: 10000,
+  });
 
   return (
     <>
@@ -54,7 +68,7 @@ function Search() {
         <Button onClick={handleSearchMovie}>검색</Button>
       </SearchContainer>
 
-      {mq && movies.data?.results.length === 0 ? (
+      {mq && movieSearch?.results.length === 0 ? (
         <Nodata>
           <H1>검색어 '{mq}'에 해당하는 영화가 없습니다.</H1>
         </Nodata>
@@ -65,7 +79,7 @@ function Search() {
         </MovieContainer>
       ) : (
         <MovieContainer>
-          {movies.data?.results.map((movie) => (
+          {movieSearch?.results.map((movie) => (
             <div key={movie.id}>
               <ContainerImg
                 src={`${base_url}${file_size}${movie.poster_path}`}

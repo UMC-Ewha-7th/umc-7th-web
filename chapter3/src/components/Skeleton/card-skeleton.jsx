@@ -40,6 +40,7 @@ const CardMain = styled.div`
   background-color: rgb(230, 230, 230);
   border-radius: 7px;
   overflow: hidden;
+  animation: ${skeleton} 3s 1s infinite alternate;
 `;
 
 const TextWrapper = styled.div`
