@@ -3,6 +3,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import useCustomFetch from '../hooks/useCustomFetch.js';
 import { replace, useNavigate } from 'react-router-dom';
+import { useGetMovies } from '../hooks/queries/useGetMovies.js';
+import { useQuery } from '@tanstack/react-query';
+import CardListSkeleton from '../components/Skeleton/card-list-skeleton.jsx';
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -33,23 +36,45 @@ const Date = styled.p`
   margin: 2px;
 `;
 
+const MovieContainer = styled.div`
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 25px;
+  padding: 20px;
+`;
+
 function NowPlaying() {
   const base_url = 'https://image.tmdb.org/t/p/';
   const file_size = 'w200/';
 
   const navigate = useNavigate();
 
+  // const {
+  //   data: movies,
+  //   isLoading,
+  //   isError,
+  // } = useCustomFetch(`/movie/now_playing?language=ko-KR&page=1`);
+
+  //isPending: 데이터를 불러오는 중. 데이터가 로딩 중일 때 isPending은 true
+  //isLoading: 데이터를 불러오는 중이거나, 재시도 중일 때 true
   const {
     data: movies,
-    isLoading,
+    isPending,
     isError,
-  } = useCustomFetch(`/movie/now_playing?language=ko-KR&page=1`);
+  } = useQuery({
+    queryKey: ['movies', 'now_playing'],
+    queryFn: () => useGetMovies({ category: 'now_playing', pageParam: 1 }),
+    cacheTime: 10000,
+    staleTime: 10000,
+  });
 
-  if (isLoading) {
+  if (isPending) {
     return (
-      <div>
-        <h1 style={{ color: 'white' }}>로딩 중입니다...</h1>
-      </div>
+      <MovieContainer>
+        {' '}
+        <CardListSkeleton />
+      </MovieContainer>
     );
   }
 
@@ -64,7 +89,7 @@ function NowPlaying() {
   return (
     <>
       <Container>
-        {movies.data?.results.map((movie) => (
+        {movies?.results?.map((movie) => (
           <div key={movie.id}>
             <ContainerImg
               src={`${base_url}${file_size}${movie.poster_path}`}

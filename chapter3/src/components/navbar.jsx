@@ -2,6 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { axiosInstance } from '../apis/axios-instance';
+import { useQuery } from '@tanstack/react-query';
 
 const YONGCHA = styled.h3`
   padding: 0px;
@@ -52,29 +54,23 @@ const StyledLink = styled(Link)`
 function Navbar() {
   const navigate = useNavigate();
   const [authorized, setAuthorized] = useState(false);
-  const [nickname, setNickname] = useState('');
+  // // const [nickname, setNickname] = useState('');
   const accessToken = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
 
-  const getUser = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3000/user/me`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      const nickname = response.data.email.split('@', 1);
-      setNickname(nickname);
-    } catch (error) {
-      console.error('회원 정보 반환 에러', error);
-    }
-  };
-
-  useEffect(() => {
-    if (accessToken) {
-      setAuthorized(true);
-      getUser();
-    }
-  }, []);
+  // const getUser = async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:3000/user/me`, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     });
+  //     const nickname = response.data.email.split('@', 1);
+  //     setNickname(nickname);
+  //   } catch (error) {
+  //     console.error('회원 정보 반환 에러', error);
+  //   }
+  // };
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
@@ -82,6 +78,62 @@ function Navbar() {
     setAuthorized(false);
     navigate('/');
   };
+
+  const getUser = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:3000/user/me`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log('try data:', data);
+      return data;
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        try {
+          const { data } = await axios.post(
+            `http://localhost:3000/auth/token/access`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${refreshToken}`,
+              },
+            }
+          );
+          localStorage.setItem('accessToken', data.accessToken);
+          localStorage.setItem('refreshToken', data.refreshToken);
+          const NewRefreshToken = localStorage.getItem('refreshToken');
+          console.log('refreshToken 확인', NewRefreshToken);
+
+          const newResponse = await axios.get(`http://localhost:3000/user/me`, {
+            headers: {
+              Authorization: `Bearer ${data.accessToken}`,
+            },
+          });
+          console.log('catch data:', newResponse.data);
+          return newResponse.data;
+        } catch (error) {
+          console.error('회원 정보 반환 에러', error);
+          handleLogout();
+        }
+      }
+    }
+  };
+
+  const { data: userInfo } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: () => getUser(),
+  });
+
+  const nickname = userInfo?.email?.split('@', 1);
+  console.log('nickname: ', nickname);
+
+  useEffect(() => {
+    console.log('navbar render');
+    if (accessToken) {
+      setAuthorized(true);
+    }
+  }, []);
 
   return (
     <Bar>
