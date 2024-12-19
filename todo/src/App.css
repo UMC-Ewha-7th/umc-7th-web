@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    background-color: rgb(223, 235, 252);            
+    padding-top: 10vh;
+}
+
+p{
+    margin: 0px;
+}
+
+.todo{
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+}
