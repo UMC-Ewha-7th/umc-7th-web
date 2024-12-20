@@ -14,6 +14,7 @@ export const Pagination = styled.div`
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
+    
 
     button {
         padding: 8px 16px;
@@ -22,6 +23,10 @@ export const Pagination = styled.div`
         border-radius: 4px;
         cursor: pointer;
         font-size: 1em;
+        font-family: "Noto Sans KR", serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
         &:disabled {
             background-color: #ccc;
             cursor: not-allowed;
@@ -29,8 +34,13 @@ export const Pagination = styled.div`
     }
 
     span {
+        font-family: "Noto Sans KR", serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
         font-size: 1.2em;
         font-weight: bold;
+        color: #FAFAFA;
     }
 
 `

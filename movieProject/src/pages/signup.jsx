@@ -7,13 +7,14 @@ import axios from "axios";
 
 const SignUp = () => {
     const schema = yup.object().shape({
-        email: yup.string().email().required('이메일을 반드시 입력해 주세요'),
+        email: yup.string().email('유효한 이메일 주소를 입력해 주세요').required('이메일을 반드시 입력해 주세요'),
         password: yup.string().min(8,'비밀번호는 최소 8자리입니다.').max(16, '비밀번호는 최대 16자리입니다.').required('비밀번호를 반드시 입력해 주세요.'),
         passwordCheck: yup.string().min(8,'비밀번호는 최소 8자리입니다.').max(16, '비밀번호는 최대 16자리입니다.').required('비밀번호를 반드시 확인해 주세요.').oneOf([yup.ref('password'), null],
         '비밀번호가 일치하지 않습니다.')
     });
 
     const {register, handleSubmit, formState:{errors, isValid}} = useForm({
+        mode: "onChange",
         resolver: yupResolver(schema)
     });
 

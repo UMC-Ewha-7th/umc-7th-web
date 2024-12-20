@@ -17,6 +17,7 @@ const NowMovie = () =>{
         return response.data;
     }
 
+
     const [currentPage, setCurrentPage] = useState(1);
     const {data: movies, isLoading, isFetching, isError} = useQuery(
         ["nowPlayingMovies", currentPage],
@@ -25,8 +26,6 @@ const NowMovie = () =>{
             keepPreviousData: true,
         }
     )
-
-    console.log(movies);
 
     const handlePageChange = (direction)=>{
         setCurrentPage((prevPage)=>prevPage + direction);

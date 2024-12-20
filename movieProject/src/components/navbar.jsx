@@ -13,7 +13,7 @@ const Navbar = () =>{
             {isAuthenticated ? (
                 <div className="navButton">
                     <p>{nickname}님 환영합니다</p>
-                    <LogoutB onClick={logout}>로그아웃</LogoutB>
+                    <ButtonLink2 onClick={logout}>로그아웃</ButtonLink2>
                 </div>
             ):(
                 <div className="navButton">
@@ -43,22 +43,6 @@ const ButtonLink2 = styled(Link)`
     height: 30px;
     align-content: center;
     align-items: center;
-
-    background-color: #FFDD1A;
-    border-radius: 5px;
-    text-decoration: none;  
-    color: rgb(58, 58, 58);
-    padding:3px;
-    &:hover{
-        background-color: #FFDD1A50;
-    }
-`
-const LogoutB = styled.div`
-    box-sizing: content-box;
-    height: 30px;
-    align-content: center;
-    align-items: center;
-    cursor: pointer;
 
     background-color: #FFDD1A;
     border-radius: 5px;

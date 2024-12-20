@@ -1,9 +1,16 @@
 import styled from "styled-components";
+import blankProfile from "../../../public/blankProfile.webp"
 
 const Cast = (props) =>{
     return(
         <CastCard>
-            <img src={"https://image.tmdb.org/t/p/w500/" + props.profile_path}/>
+            {(props.profile_path == null) ? (
+                <img src={blankProfile} />
+            ) : (
+                <img src={"https://image.tmdb.org/t/p/w500/" + props.profile_path} />
+
+            )}
+
             <p> {props.name} </p>
             <p className="character"> {props.character} </p>
         </CastCard>

@@ -33,6 +33,7 @@ const Conents = styled.div`
 
 const SOutlet = styled.div`
     margin-left: 170px;
+    
     height: 100%; 
 `
 

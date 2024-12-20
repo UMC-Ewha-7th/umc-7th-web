@@ -26,6 +26,7 @@ const SearchB = styled.div`
     gap: 5px;
     align-items: center;
     margin-top: 10px;
+
 `
 
 const ListB = styled.div`
@@ -38,6 +39,9 @@ const ListB = styled.div`
 const SideLink = styled(Link)`
     text-decoration: none;
     color: #f0f0f0;
+    &:hover{
+        color: #FFDD1A;
+    }
 `
 
 export default Sidebar;

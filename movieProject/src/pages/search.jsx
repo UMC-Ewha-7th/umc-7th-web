@@ -96,7 +96,7 @@ const SearchBar = styled.input`
     border-radius: 4px;
 `
 const SearchButton = styled.button`
-    box-sizing: content-box;
+    box-sizing: border-box;
     background-color: #FFDD1A;
     border-radius: 4px;
     margin: 0px;
@@ -105,6 +105,9 @@ const SearchButton = styled.button`
     height: 45px;    
     background-color: #FFDD1A;
     border-radius: 4px;
+    &:hover{
+        cursor: pointer;
+    }
 `
 
 export default SearchPage;

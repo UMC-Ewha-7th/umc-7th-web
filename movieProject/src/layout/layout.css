@@ -13,6 +13,11 @@
     height: 50px;
     padding-left:10px;
     padding-right: 10px;
+
+    font-family: "Noto Sans KR", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .navButton{
@@ -23,6 +28,7 @@
 
 .sidebar{
     position: fixed;
+    z-index: 999;
     width: 150px;
     height: 100%;
     
@@ -32,4 +38,10 @@
     flex-direction: column;
     background-color: rgb(43, 43, 43);
     padding-left: 10px;
+
+    
+    font-family: "Noto Sans KR", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }

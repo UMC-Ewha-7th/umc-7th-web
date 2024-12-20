@@ -76,7 +76,7 @@ function App(){
   return(
     <QueryClientProvider client={queryClient}>
       <Mainpage> 
-      <RouterProvider router={router}/>     
+        <RouterProvider router={router}/>     
       </Mainpage>
     </QueryClientProvider>
   ) 

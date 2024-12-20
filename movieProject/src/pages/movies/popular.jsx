@@ -23,8 +23,6 @@ const PopMovie = () =>{
         }
     )
 
-    console.log(movies);
-
     const handlePageChange = (direction)=>{
         setCurrentPage((prevPage)=>prevPage + direction);
     }
