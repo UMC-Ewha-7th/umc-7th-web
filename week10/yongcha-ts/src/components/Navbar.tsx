@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import StyledLink from './StyledLink';
-import WhiteSpan from './WhiteSpan';
 import StyledBtn from './StyledBtn';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,6 +39,14 @@ const Navbar = () => {
 }
 
 export default Navbar;
+
+const WhiteSpan = styled.div`
+    color: white;
+    margin-right: 20px;
+    &:hover {
+        background-color: grey;
+    }
+`
 
 const LogoSpan = styled.span`
     color: red;
