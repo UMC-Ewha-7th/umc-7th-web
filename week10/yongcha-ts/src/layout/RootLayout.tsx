@@ -23,7 +23,7 @@ export default RootLayout;
 const MainContainer = styled.div<{ padding: string }>`
     ${({padding}) => {
         const paddingLR = padding==='true' ? '10px' : '40px';
-        return `padding: 0-px ${paddingLR} 20px ${paddingLR};`
+        return `padding: 0px ${paddingLR} 20px ${paddingLR};`
     }}
     background-color: black;
     height: auto;
