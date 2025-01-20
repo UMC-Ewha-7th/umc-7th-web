@@ -1,11 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { fetchMovies } from "../queries/fetchMovies";
 
 const HomePage = () => {
-
     return (
-        <>
+        <div style={{marginTop:'100px'}}>
         <Link to='/'>홈</Link>
         <Link to='/login'>로그인</Link>
         <Link to='/signup'>회원가입</Link>
@@ -16,7 +13,7 @@ const HomePage = () => {
         <Link to='/movies/top-rated'>TopRated</Link>
         <Link to='/movies/up-coming'>Upcoming</Link>
         <Link to='/movies/:movieId'>상세페이지</Link>
-        </>
+        </div>
     )
 };
 
