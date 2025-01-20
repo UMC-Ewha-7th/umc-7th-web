@@ -1,10 +1,8 @@
-export type TCategory = {
-    category: 
-    'now_playing'
+export type TCategory = 
+    | 'now_playing'
     | 'popular'
     | 'top_rated'
     | 'upcoming';
-};
 
 export type TMovies = {
     adult: boolean,

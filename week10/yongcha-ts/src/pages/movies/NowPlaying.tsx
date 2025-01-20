@@ -22,7 +22,7 @@ const NowPlaying = () => {
         if (inView && !isFetching && hasNextPage) {
             fetchNextPage();
         }
-    }, [inView, isFetching, hasNextPage, fetchNextPage]);
+    }, [inView]);
 
     if (isPending) return (
         <>

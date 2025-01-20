@@ -1,4 +1,4 @@
-import { DefaultError, InfiniteData, QueryKey, queryOptions, useInfiniteQuery, UseInfiniteQueryOptions } from '@tanstack/react-query';
+import { DefaultError, InfiniteData, QueryKey, useInfiniteQuery, UseInfiniteQueryOptions } from '@tanstack/react-query';
 import { TCategory, TMovieResponse } from '../types/movie';
 import { getMovieList } from '../apis/getMovieList';
 
