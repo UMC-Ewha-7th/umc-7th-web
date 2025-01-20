@@ -1,6 +1,6 @@
-import axios, { AxiosInstance } from "axios";
+import axios from "axios";
 
-const axiosInstance:AxiosInstance = axios.create({
+const axiosInstance = axios.create({
     headers: {
         Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`
     },

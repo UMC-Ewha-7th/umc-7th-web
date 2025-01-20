@@ -12,6 +12,7 @@ import Popular from "./pages/movies/Popular";
 import TopRated from "./pages/movies/TopRated";
 import UpComing from "./pages/movies/UpComing";
 import MovieDetail from "./pages/movies/MovieDetail";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -63,9 +64,13 @@ const router = createBrowserRouter([
   }
 ])
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   );
 }
 
