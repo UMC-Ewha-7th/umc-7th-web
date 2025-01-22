@@ -32,7 +32,7 @@ const LoginPage = () => {
                 <label htmlFor="password">password</label>
                 <input type="password" id="password" name="password" required />
             </div>
-            <button type="submit">입력</button>
+            <button type="submit">로그인</button>
         </form>
     )
 };
