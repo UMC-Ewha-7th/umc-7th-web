@@ -1,5 +1,21 @@
 import '@testing-library/cypress/add-commands'
 /// <reference types="cypress" />
+
+const USER_DB = { username: 'Eunie', password: 'password'};
+const login = (username, password) => {
+    cy.visit('/login');
+
+    cy.findByLabelText('username').type(username);
+    cy.findByLabelText('password').type(password);
+
+    cy.findByRole('button', {name: /로그인/}).click();
+
+    cy.url().should('eq', Cypress.config().baseUrl + '/')
+};
+Cypress.Commands.add('login', 
+    (username=USER_DB.username, password=USER_DB.password) => {
+        login(username, password);
+    })
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -26,13 +42,10 @@ import '@testing-library/cypress/add-commands'
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(username: string, password: string): Chainable<void>
+    }
+  }
+}
