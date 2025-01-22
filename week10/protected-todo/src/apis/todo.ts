@@ -12,7 +12,7 @@ export const getTodoList = async (): Promise<TTodo[]> => {
                 {
                     id: 2,
                     text: 'todo 2',
-                    checked: true,
+                    checked: false,
                 }
             ]);
         });
