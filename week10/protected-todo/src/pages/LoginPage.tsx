@@ -1,7 +1,11 @@
 import { FormEvent } from "react";
 import { getAuth } from "../apis/auth";
+import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+    const navigate = useNavigate();
+    const { setUsername } = useAuthContext();
     const handleLogin = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -11,6 +15,8 @@ const LoginPage = () => {
                 username: String(formData.username),
                 password: String(formData.password)
             });
+            setUsername(user.username);
+            navigate('/');
         } catch (e) {
             alert('로그인 실패');
             console.error(e);
